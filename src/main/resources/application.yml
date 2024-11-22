@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: cheongpodo
+
+kakao:
+  secret-key: 123
+
+openApi:
+  secret-key: 123
