@@ -31,8 +31,8 @@ public class LocationController {
         return kakaoApiService.getKakaoFoodPlace(address);
     }
 
-    @GetMapping("/search-place")
-    public void searchPlace(@RequestParam("address") String address) {
-        openApiService.getOpenPlace(address);
-    }
+//    @GetMapping("/search-place")
+//    public void searchPlace(@RequestParam("address") String address) {
+//        openApiService.getOpenPlace(address);
+//    }
 }
