@@ -11,7 +11,7 @@ public class OpenApiService {
 
     private final WebClient openWebClient;
 
-//    public OpenPlaceResponse getOpenPlace() {
+//    public OpenPlaceResponse getOpenPlace(String address) {
 //        openWebClient.get()
 //    }
 

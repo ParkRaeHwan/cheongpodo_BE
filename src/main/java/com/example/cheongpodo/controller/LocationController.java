@@ -4,6 +4,7 @@ import com.example.cheongpodo.domain.KakaoCoordsResponse;
 import com.example.cheongpodo.domain.KakaoFoodPlaceResponse;
 import com.example.cheongpodo.service.KakaoApiService;
 import com.example.cheongpodo.service.OpenApiService;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,6 +31,8 @@ public class LocationController {
         return kakaoApiService.getKakaoFoodPlace(address);
     }
 
-//
-//    @GetMapping("/search-place")
+    @GetMapping("/search-place")
+    public void searchPlace(@RequestParam("address") String address) {
+        openApiService.getOpenPlace(address);
+    }
 }
