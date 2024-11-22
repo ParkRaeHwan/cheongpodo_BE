@@ -8,4 +8,3 @@ kakao:
 openApi:
   secret-key: ${OPENAPI_SECRET_KEY}
 
-#test
