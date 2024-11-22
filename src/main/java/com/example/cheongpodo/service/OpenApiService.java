@@ -1,6 +1,5 @@
 package com.example.cheongpodo.service;
 
-import com.example.cheongpodo.domain.OpenPlaceResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;

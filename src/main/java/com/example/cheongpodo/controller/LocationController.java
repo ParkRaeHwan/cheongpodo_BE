@@ -4,10 +4,7 @@ import com.example.cheongpodo.domain.KakaoCoordsResponse;
 import com.example.cheongpodo.domain.KakaoFoodPlaceResponse;
 import com.example.cheongpodo.service.KakaoApiService;
 import com.example.cheongpodo.service.OpenApiService;
-import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
