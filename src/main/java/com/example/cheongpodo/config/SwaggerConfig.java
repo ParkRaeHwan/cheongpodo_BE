@@ -9,19 +9,18 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class SwaggerConfig {
 
-    @Bean
-    public OpenAPI openAPI(){
-        return new OpenAPI()
-                .components(new Components())
-                .info(new Info());
-    }
+        @Bean
+        public OpenAPI openAPI(){
+            return new OpenAPI()
+                    .components(new Components())
+                    .info(new Info());
+        }
 
-    private Info info(){
-        return new Info()
-                .title("청포도팀 Swagger")
-                .description("청포도 프로젝트 관련 API 통신")
-                .version("1.0.0");
-
-    }
+        private Info info(){
+            return new Info()
+                    .title("청포도팀 Swagger")
+                    .description("청포도 프로젝트 관련 API 통신")
+                    .version("1.0.0");
+        }
 
 }

@@ -3,7 +3,7 @@ spring:
     name: cheongpodo
 
 kakao:
-  secret-key: 123
+  secret-key: ${KAKAO_SECRET_KEY}
 
 openApi:
-  secret-key: 123
+  secret-key: ${OPENAPI_SECRET_KEY}
