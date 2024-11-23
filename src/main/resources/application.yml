@@ -5,6 +5,3 @@ spring:
 kakao:
   secret-key: ${KAKAO_SECRET_KEY}
 
-openApi:
-  secret-key: ${OPENAPI_SECRET_KEY}
-
