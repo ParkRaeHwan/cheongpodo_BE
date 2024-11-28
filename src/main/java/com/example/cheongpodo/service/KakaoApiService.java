@@ -1,8 +1,8 @@
 package com.example.cheongpodo.service;
 
-import com.example.cheongpodo.domain.AddressNotFoundException;
-import com.example.cheongpodo.domain.KakaoCoordsResponse;
-import com.example.cheongpodo.domain.KakaoFoodPlaceResponse;
+import com.example.cheongpodo.exception.AddressNotFoundException;
+import com.example.cheongpodo.response.KakaoCoordsResponse;
+import com.example.cheongpodo.response.KakaoFoodPlaceResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;

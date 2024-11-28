@@ -13,7 +13,7 @@ public class SwaggerConfig {
         public OpenAPI openAPI(){
             return new OpenAPI()
                     .components(new Components())
-                    .info(new Info());
+                    .info(info());
         }
 
         private Info info(){

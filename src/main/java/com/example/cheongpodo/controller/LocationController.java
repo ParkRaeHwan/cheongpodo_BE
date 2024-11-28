@@ -1,7 +1,7 @@
 package com.example.cheongpodo.controller;
 
-import com.example.cheongpodo.domain.KakaoCoordsResponse;
-import com.example.cheongpodo.domain.KakaoFoodPlaceResponse;
+import com.example.cheongpodo.response.KakaoCoordsResponse;
+import com.example.cheongpodo.response.KakaoFoodPlaceResponse;
 import com.example.cheongpodo.service.KakaoApiService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;

@@ -1,7 +1,7 @@
 package com.example.cheongpodo.controller;
 
-import com.example.cheongpodo.domain.AddressNotFoundException;
-import com.example.cheongpodo.domain.ErrorResult;
+import com.example.cheongpodo.exception.AddressNotFoundException;
+import com.example.cheongpodo.exception.ErrorResult;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
