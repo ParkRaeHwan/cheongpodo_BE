@@ -33,7 +33,7 @@ public class ReviewController {
     // 특정 청년공간의 모든 리뷰 조회
     @Operation(summary = "특정 청년 공간의 모든 리뷰 조회 API",
             description = "청년 공간 ID를 받아 해당 모든 리뷰 조회 API")
-    @GetMapping("/reviews")
+    @GetMapping("/showReviews")
     public List<ReviewResponse> getReviews(@RequestParam(required = false) Long youthSpaceId) {
         if (youthSpaceId != null) {
             return reviewService.getReviewsByYouthSpaceId(youthSpaceId);
