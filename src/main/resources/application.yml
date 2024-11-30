@@ -24,7 +24,24 @@ spring:
 kakao:
   secret-key:
 
-
 jwt:
   secret:
   expirationMs: 86400000
+
+  #Email 인증
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: "miriyouth63@gmail.com"
+    password:
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+          ssl.enable: false  # 이 부분 추가 (SSL 비활성화)
+          connectiontimeout: 5000
+          timeout: 5000
+          writetimeout: 5000
+    auth-code-expiration-millis: 1800000  # 30 * 60 * 1000 == 30?

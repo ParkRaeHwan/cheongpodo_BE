@@ -51,7 +51,8 @@ public class WebSecurityConfig {
                                 "/swagger-ui.html",
                                 "/swagger-resources/**",
                                 "/webjars/**",
-                                "/api/showReviews","/api/search-food","/api/search-position"
+                                "/api/showReviews", "/api/search-food", "/api/search-position",
+                                "/api/spaceInfo/send-email"
                         ).permitAll()
                         .anyRequest().authenticated()
                 );
