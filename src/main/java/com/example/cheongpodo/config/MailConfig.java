@@ -1,5 +1,6 @@
 package com.example.cheongpodo.config;
 
+import lombok.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -9,13 +10,15 @@ import java.util.Properties;
 
 @Configuration
 public class MailConfig {
+
     @Bean
     public JavaMailSender javaMailService() {
         JavaMailSenderImpl javaMailSender = new JavaMailSenderImpl();
 
         javaMailSender.setHost("smtp.gmail.com");
-        javaMailSender.setUsername("");
-        javaMailSender.setPassword("");
+        javaMailSender.setUsername("miriyouth63@gmail.com");
+
+        javaMailSender.setPassword("lhjm umqa buzo asho");
 
         javaMailSender.setPort(587);
 

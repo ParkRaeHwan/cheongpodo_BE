@@ -22,10 +22,10 @@ spring:
       port: 6379
 
 kakao:
-  secret-key:
+  secret-key: ${KAKAO_SECRET_KEY}
 
 jwt:
-  secret:
+  secret: ${JWT_SECRET}
   expirationMs: 86400000
 
   #Email 인증
@@ -33,7 +33,7 @@ jwt:
     host: smtp.gmail.com
     port: 587
     username: "miriyouth63@gmail.com"
-    password:
+    password: "lhjm umqa buzo asho"
     properties:
       mail:
         smtp:
