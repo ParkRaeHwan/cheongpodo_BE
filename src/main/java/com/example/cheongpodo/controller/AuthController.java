@@ -20,7 +20,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api")
@@ -38,7 +40,11 @@ public class AuthController {
     public ResponseEntity<?> registerUser(@Validated @RequestBody UserDto userDto) {
         try {
             userService.registerUser(userDto);
-            return ResponseEntity.ok("회원가입이 성공적으로 처리되었습니다.");
+            // JSON 응답 객체 생성
+            Map<String, Object> response = new HashMap<>();
+            response.put("message", "회원가입이 성공적으로 처리되었습니다.");
+            // JSON 응답 반환
+            return ResponseEntity.ok(response);
         } catch (RuntimeException e) {
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
