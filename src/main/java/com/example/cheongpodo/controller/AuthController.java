@@ -46,9 +46,14 @@ public class AuthController {
             // JSON 응답 반환
             return ResponseEntity.ok(response);
         } catch (RuntimeException e) {
+            // 오류 발생 시 JSON 형태로 응답
+            Map<String, Object> errorResponse = new HashMap<>();
+            errorResponse.put("message", e.getMessage());
+            errorResponse.put("status", "error");
+
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
-                    .body(e.getMessage());
+                    .body(errorResponse);
         }
     }
 
