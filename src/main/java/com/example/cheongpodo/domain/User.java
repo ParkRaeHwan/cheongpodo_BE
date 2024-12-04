@@ -3,6 +3,7 @@ package com.example.cheongpodo.domain;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -31,5 +32,8 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private List<Review> reviews;
+
+    @ElementCollection
+    private List<Long> favoriteSpaces = new ArrayList<>();
 
 }

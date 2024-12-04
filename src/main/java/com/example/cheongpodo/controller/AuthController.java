@@ -1,6 +1,8 @@
 package com.example.cheongpodo.controller;
 
+import com.example.cheongpodo.domain.User;
 import com.example.cheongpodo.dto.UserDto;
+import com.example.cheongpodo.repository.UserRepository;
 import com.example.cheongpodo.request.LoginRequest;
 import com.example.cheongpodo.response.LoginResponse;
 import com.example.cheongpodo.service.UserService;
@@ -13,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -32,6 +35,7 @@ public class AuthController {
     private final AuthenticationManager authenticationManager;
     private final UserService userService;
     private final JwtUtil jwtUtil;
+    private final UserRepository userRepository;
 
 
     @Operation(summary = "회원가입 API 입니다.",
@@ -68,10 +72,24 @@ public class AuthController {
                             loginRequest.getUsername(),
                             loginRequest.getPassword()
                     ));
+
+            // 사용자 정보 조회
+            User user = userRepository.findByUsername(loginRequest.getUsername())
+                    .orElseThrow(() -> new UsernameNotFoundException("사용자를 찾을 수 없습니다."));
             // 인증 성공시 토큰 생성
             String jwt = jwtUtil.generateToken(loginRequest.getUsername());
 
-            return ResponseEntity.ok(new LoginResponse(jwt));
+            // LoginResponse 생성
+            LoginResponse loginResponse = LoginResponse.builder()
+                    .token(jwt)
+                    .id(user.getId())
+                    .username(user.getUsername())
+                    .nickname(user.getNickname())
+                    .email(user.getEmail())
+                    .favoriteSpaces(user.getFavoriteSpaces())
+                    .build();
+
+            return ResponseEntity.ok(loginResponse);
 
         }catch(BadCredentialsException e){
             return ResponseEntity
@@ -79,6 +97,4 @@ public class AuthController {
                     .body(e.getMessage());
         }
     }
-
-
 }

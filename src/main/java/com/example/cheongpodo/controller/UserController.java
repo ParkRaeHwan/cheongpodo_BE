@@ -2,13 +2,19 @@ package com.example.cheongpodo.controller;
 
 import com.example.cheongpodo.request.NicknameChangeRequest;
 import com.example.cheongpodo.request.PasswordChangeRequest;
+import com.example.cheongpodo.service.FavoriteSpaceService;
 import com.example.cheongpodo.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api")
@@ -16,6 +22,7 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
 
     private final UserService userService;
+    private final FavoriteSpaceService favoriteSpaceService;
 
     @Operation(summary = "닉네임 변경 API",
             description = "새로운 닉네임을 받아 변경")
@@ -34,7 +41,9 @@ public class UserController {
     public void changePassword(@Valid @RequestBody PasswordChangeRequest request,
                                Authentication authentication) {
         String username = authentication.getName();
-        userService.changePassword(username,request);
+        userService.changePassword(username, request);
     }
+
+
 
 }
