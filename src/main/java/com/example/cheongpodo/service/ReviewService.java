@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.reactive.resource.NoResourceFoundException;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -54,6 +55,7 @@ public class ReviewService {
             throw new UnauthorizedException("현재 사용자는 해당 후기의 권한이 없습니다.");
         }
         review.setContent(reviewRequest.getContent());
+        review.setUpdateAt(LocalDateTime.now());
         Review savedReview = reviewRepository.save(review);
 
         return mapToResponse(savedReview);
