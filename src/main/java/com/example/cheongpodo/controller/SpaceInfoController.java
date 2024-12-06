@@ -25,4 +25,5 @@ public class SpaceInfoController {
         String result = spaceInfoService.sendEmail(spaceId, content);
         return ResponseEntity.ok(result);
     }
+
 }
