@@ -25,7 +25,7 @@ kakao:
   secret-key: 73b8728853542d6b6504f951d50b97a7
 
 jwt:
-  secret: ${JWT_SECRET}
+  secret: "c29tZV9yYW5kb21fY3JlZGVudGlhbHMxMjM0NTY3ODkwYWJjZGVmZ2hpamtsbW5vcHFyc3R1dnd4eXo="
   expirationMs: 86400000
 
   #Email 인증
@@ -33,7 +33,7 @@ jwt:
     host: smtp.gmail.com
     port: 587
     username: "miriyouth63@gmail.com"
-    password: ${EMAIL_PASSWORD}
+    password: "lhjm umqa buzo asho"
     properties:
       mail:
         smtp:
