@@ -38,7 +38,7 @@ public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                // CSRF 비활성화 (REST API에서는 보통 사용하지 않음)
+                // CSRF 비활성화
                 .csrf(csrf -> csrf.disable())
                 // 세션을 사용하지 않고, JWT를 사용하므로 상태를 서버에 저장하지 않음
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
