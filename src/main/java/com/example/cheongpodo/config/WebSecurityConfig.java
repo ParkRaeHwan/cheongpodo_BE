@@ -53,7 +53,7 @@ public class WebSecurityConfig {
                                 "/webjars/**",
                                 "/api/showReviews", "/api/search-food", "/api/search-position",
                                 "/api/spaceInfo/send-email"
-                                ,"/api/reservationAddress/get"
+                                ,"/api/reservationAddress/get","/api/geocoding/get-coordinates"
                         ).permitAll()
                         .anyRequest().authenticated()
                 );

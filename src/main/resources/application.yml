@@ -10,7 +10,7 @@ spring:
     database-platform: org.hibernate.dialect.MySQLDialect
     show-sql: true
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
     generate-ddl: false
     properties:
       hibernate:
@@ -22,10 +22,14 @@ spring:
       port: 6379
 
 kakao:
-  secret-key: 73b8728853542d6b6504f951d50b97a7
+  secret-key: bc691e816ed5341535bf4db8cc7afd5f
+
+google:
+  api:
+    key:
 
 jwt:
-  secret: "c29tZV9yYW5kb21fY3JlZGVudGlhbHMxMjM0NTY3ODkwYWJjZGVmZ2hpamtsbW5vcHFyc3R1dnd4eXo="
+  secret:
   expirationMs: 86400000
 
   #Email 인증

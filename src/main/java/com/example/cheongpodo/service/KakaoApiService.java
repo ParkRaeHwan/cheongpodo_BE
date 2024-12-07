@@ -3,6 +3,7 @@ package com.example.cheongpodo.service;
 import com.example.cheongpodo.exception.AddressNotFoundException;
 import com.example.cheongpodo.response.KakaoCoordsResponse;
 import com.example.cheongpodo.response.KakaoFoodPlaceResponse;
+import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -14,7 +15,16 @@ import java.util.List;
 @RequiredArgsConstructor
 public class KakaoApiService {
 
-    private final WebClient kakaoWebClient;
+    private final WebClient.Builder webClientBuilder;
+    private WebClient kakaoWebClient;
+
+    @PostConstruct
+    public void init() {
+        this.kakaoWebClient = webClientBuilder
+                .baseUrl("https://dapi.kakao.com")
+                .defaultHeader("Authorization", "KakaoAK b0ec95afbb30c9bb234e6c16f66ec9a4")
+                .build();
+    }
 
     // 해당 주소 경도, 위도 조회
     public KakaoCoordsResponse.Document getKakaoPosition(String address) {
