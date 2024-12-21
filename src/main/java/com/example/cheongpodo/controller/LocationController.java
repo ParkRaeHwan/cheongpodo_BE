@@ -27,10 +27,9 @@ public class LocationController {
 
     @Operation(summary = "입력한 주소 근처 음식점 조회 API",
             description = "클라이언트가 요청한 주소값 반경 2km내 음식점을 조회해주는 API")
-    @Parameter(name = "address", description = "클라이언트가 요청한 주소 입력")
-    @GetMapping("/search-food")
-    public List<KakaoFoodPlaceResponse.Document> searchFoodPlace(@RequestParam("address") String address) {
-        return kakaoApiService.getKakaoFoodPlace(address);
+    @GetMapping("/search-facilities")
+    public List<KakaoFoodPlaceResponse.Document> searchFacilitiesPlace(@RequestParam("address") String address, @RequestParam("category") String category) {
+        return kakaoApiService.getKakaoFoodPlace(address, category);
     }
 
 }

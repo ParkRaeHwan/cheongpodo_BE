@@ -1,6 +1,7 @@
 package com.example.cheongpodo.service;
 
 import com.example.cheongpodo.domain.AddressNotFoundException;
+import com.example.cheongpodo.domain.CategoryNotFoundException;
 import com.example.cheongpodo.domain.KakaoCoordsResponse;
 import com.example.cheongpodo.domain.KakaoFoodPlaceResponse;
 import lombok.RequiredArgsConstructor;
@@ -28,11 +29,11 @@ public class KakaoApiService {
 
         return result.getDocuments().stream()
                 .findFirst()
-                .orElseThrow(() -> new AddressNotFoundException());
+                .orElseThrow(() -> new AddressNotFoundException("잘못된 주소 입력"));
     }
 
     // 해당 주소 기준 음식점 조회
-    public List<KakaoFoodPlaceResponse.Document> getKakaoFoodPlace(String address) {
+    public List<KakaoFoodPlaceResponse.Document> getKakaoFoodPlace(String address, String categoryCode) {
         // 카카오 좌표 정보 가져오기
         KakaoCoordsResponse.Document kakaoPosition = getKakaoPosition(address);
         String x = kakaoPosition.getLongitude();  // 경도
@@ -47,7 +48,7 @@ public class KakaoApiService {
 
             KakaoFoodPlaceResponse response = kakaoWebClient.get()
                     .uri(uriBuilder -> uriBuilder.path("/v2/local/search/category.json")
-                            .queryParam("category_group_code", "FD6")
+                            .queryParam("category_group_code", categoryCode)
                             .queryParam("x", x)
                             .queryParam("y", y)
                             .queryParam("radius", 400)
