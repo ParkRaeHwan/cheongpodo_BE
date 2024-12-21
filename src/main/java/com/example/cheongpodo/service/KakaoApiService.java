@@ -1,15 +1,14 @@
 package com.example.cheongpodo.service;
 
 import com.example.cheongpodo.domain.AddressNotFoundException;
+import com.example.cheongpodo.domain.CategoryNotFoundException;
 import com.example.cheongpodo.domain.KakaoCoordsResponse;
 import com.example.cheongpodo.domain.KakaoFoodPlaceResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
-import reactor.core.publisher.Mono;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -19,41 +18,55 @@ public class KakaoApiService {
     private final WebClient kakaoWebClient;
 
     // 해당 주소 경도, 위도 조회
-    public KakaoCoordsResponse.Document getKakaoPosition(String address){
+    public KakaoCoordsResponse.Document getKakaoPosition(String address) {
         KakaoCoordsResponse result = kakaoWebClient.get()
                 .uri(uriBuilder -> uriBuilder.path("/v2/local/search/address.json")
                         .queryParam("query", address)
                         .build())
                 .retrieve()
-//                .onStatus(status -> {
-//                    }, clientResponse -> {return Mono.error(new AddressNotFoundException());})
                 .bodyToMono(KakaoCoordsResponse.class)
                 .block();
 
         return result.getDocuments().stream()
                 .findFirst()
-                .orElseThrow(() -> new AddressNotFoundException());
+                .orElseThrow(() -> new AddressNotFoundException("잘못된 주소 입력"));
     }
 
     // 해당 주소 기준 음식점 조회
-    public List<KakaoFoodPlaceResponse.Document> getKakaoFoodPlace(String address){
+    public List<KakaoFoodPlaceResponse.Document> getKakaoFoodPlace(String address, String categoryCode) {
+        // 카카오 좌표 정보 가져오기
         KakaoCoordsResponse.Document kakaoPosition = getKakaoPosition(address);
-        String x = kakaoPosition.getLatitude();
-        String y = kakaoPosition.getLongitude();
+        String x = kakaoPosition.getLongitude();  // 경도
+        String y = kakaoPosition.getLatitude();   // 위도
 
-        KakaoFoodPlaceResponse response = kakaoWebClient.get()
-                .uri(uriBuilder -> uriBuilder.path("/v2/local/search/keyword.json")
-                        .queryParam("query", "음식점")
-                        .queryParam("x", x)
-                        .queryParam("y", y)
-                        .queryParam("radius", 2000)
-                        .queryParam("sort", "distance")
-                        .build())
-                .retrieve()
-                .bodyToMono(KakaoFoodPlaceResponse.class)
-                .block();
+        List<KakaoFoodPlaceResponse.Document> allDocuments = new ArrayList<>();
+        int page = 1;
 
-        return response != null ? response.getDocuments() : List.of();
+        while (true) {
+            // 카카오 로컬 API 호출
+            int finalPage = page;
+
+            KakaoFoodPlaceResponse response = kakaoWebClient.get()
+                    .uri(uriBuilder -> uriBuilder.path("/v2/local/search/category.json")
+                            .queryParam("category_group_code", categoryCode)
+                            .queryParam("x", x)
+                            .queryParam("y", y)
+                            .queryParam("radius", 400)
+                            .queryParam("page", finalPage)
+                            .queryParam("sort", "distance")
+                            .build())
+                    .retrieve()
+                    .bodyToMono(KakaoFoodPlaceResponse.class)
+                    .block();
+
+            allDocuments.addAll(response.getDocuments());
+            if (response.getMeta().isEnd()) {
+                break;
+            }
+            page++;
+        }
+
+        return allDocuments;
     }
 
 }

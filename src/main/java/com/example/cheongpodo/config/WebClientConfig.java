@@ -3,6 +3,8 @@ package com.example.cheongpodo.config;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.codec.xml.Jaxb2XmlDecoder;
+import org.springframework.web.reactive.function.client.ExchangeStrategies;
 import org.springframework.web.reactive.function.client.WebClient;
 
 @Configuration
@@ -10,8 +12,6 @@ public class WebClientConfig {
 
     @Value("${kakao.secret-key}")
     private String kakoSecretKey;
-    @Value("${openApi.secret-key}")
-    private String openApiSecretKey;
 
     @Bean(name = "kakaoWebClient")
     WebClient kakoWebClient() {
@@ -20,13 +20,4 @@ public class WebClientConfig {
                 .defaultHeader("Authorization", "KakaoAK " + kakoSecretKey)
                 .build();
     }
-
-    @Bean(name = "openWebClient")
-    WebClient openWebClient() {
-        return WebClient.builder()
-                .baseUrl("https://www.youthcenter.go.kr/opi/wantedSpace.do")
-                .defaultHeader("openApiVlak", openApiSecretKey)
-                .build();
-    }
-
 }
