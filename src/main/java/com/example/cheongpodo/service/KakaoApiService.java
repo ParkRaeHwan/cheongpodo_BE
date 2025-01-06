@@ -1,9 +1,8 @@
 package com.example.cheongpodo.service;
 
-import com.example.cheongpodo.exception.AddressNotFoundException;
-import com.example.cheongpodo.response.KakaoCoordsResponse;
-import com.example.cheongpodo.response.KakaoFoodPlaceResponse;
-import jakarta.annotation.PostConstruct;
+import com.example.cheongpodo.domain.AddressNotFoundException;
+import com.example.cheongpodo.domain.KakaoCoordsResponse;
+import com.example.cheongpodo.domain.KakaoFoodPlaceResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -15,16 +14,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class KakaoApiService {
 
-    private final WebClient.Builder webClientBuilder;
-    private WebClient kakaoWebClient;
-
-    @PostConstruct
-    public void init() {
-        this.kakaoWebClient = webClientBuilder
-                .baseUrl("https://dapi.kakao.com")
-                .defaultHeader("Authorization", "KakaoAK b0ec95afbb30c9bb234e6c16f66ec9a4")
-                .build();
-    }
+    private final WebClient kakaoWebClient;
 
     // 해당 주소 경도, 위도 조회
     public KakaoCoordsResponse.Document getKakaoPosition(String address) {
@@ -42,7 +32,7 @@ public class KakaoApiService {
     }
 
     // 해당 주소 기준 음식점 조회
-    public List<KakaoFoodPlaceResponse.Document> getKakaoFoodPlace(String address, String categoryCode) {
+    public List<KakaoFoodPlaceResponse.Document> getKakaoFoodPlace(String address) {
         // 카카오 좌표 정보 가져오기
         KakaoCoordsResponse.Document kakaoPosition = getKakaoPosition(address);
         String x = kakaoPosition.getLongitude();  // 경도
@@ -57,7 +47,7 @@ public class KakaoApiService {
 
             KakaoFoodPlaceResponse response = kakaoWebClient.get()
                     .uri(uriBuilder -> uriBuilder.path("/v2/local/search/category.json")
-                            .queryParam("category_group_code", categoryCode)
+                            .queryParam("category_group_code", "FD6")
                             .queryParam("x", x)
                             .queryParam("y", y)
                             .queryParam("radius", 400)
