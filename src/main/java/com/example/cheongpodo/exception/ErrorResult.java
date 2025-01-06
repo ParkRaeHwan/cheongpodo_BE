@@ -1,4 +1,4 @@
-package com.example.cheongpodo.domain;
+package com.example.cheongpodo.exception;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
