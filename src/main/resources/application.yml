@@ -22,8 +22,7 @@ spring:
       port: 6379
 
 kakao:
-  secret-key: bc691e816ed5341535bf4db8cc7afd5f
-
+  secret-key: 
 google:
   api:
     key:
